@@ -13,8 +13,7 @@ class Solution {
     vector<int>ans;
 public:
     vector<int> postorderTraversal(TreeNode* root) {
-        if(root==nullptr)return ans;
-        stack<TreeNode*>st;
+         stack<TreeNode*>st;
         auto cur=root;
         while(!st.empty()|| cur)
         {
