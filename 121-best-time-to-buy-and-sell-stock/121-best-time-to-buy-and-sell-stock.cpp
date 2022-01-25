@@ -1,18 +1,25 @@
 class Solution {
-    int n;
-    int find(vector<int>&v, int i,int mn )
+    int dp[100005][2] ;
+     int n;
+    int find(vector<int>&v,int i,bool buy,int k)
     {
-        if(i==n) return 0;
-      if(mn>v[i])
-         return  find(v,i+1,v[i] ) ;
-       else return max(v[i]-mn,find(v,i+1,mn));  
-        
+        if( n==1|| i==n  || k==0)return 0;
+        if(dp[i][buy]!=-1)return dp[i][buy];
+        if(buy)
+        {
+            
+            return dp[i][buy]= max(-v[i]+find(v,i+1,!buy,k ),find(v,i+1,buy,k));
+        }else{
+            
+            return dp[i][buy]= max(v[i],find(v,i+1,buy,k));
+      
+        }
     }
-    public:
-    int maxProfit(vector<int>& prices) {
-        
-        n=prices.size();
-    return find(prices,0,prices[0]);
     
+public:
+    int maxProfit(vector<int>& prices) {
+        n=prices.size();
+       memset(dp,-1,sizeof(dp));
+        return max(0,find(prices,0,1,1));
     }
 };
