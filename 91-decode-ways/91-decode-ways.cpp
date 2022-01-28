@@ -8,12 +8,9 @@ class Solution {
         
         string  rr="";
         int a=0,b=0;
-        // if(s[i]=='0')
-        //     i++;
-        if(dp[i]!=-1)return dp[i];
-        // cout<<"1\n";
-        
-        if(i!=n-1 and s[i]!='0'  ){
+        if(dp[i]!=0)return dp[i];
+        cout<<"1\n";
+        if(i!=n-1 and s[i]!='0'){
             rr.push_back(s[i]);
             rr.push_back(s[i+1]);
         }
@@ -31,7 +28,6 @@ public:
     int numDecodings(string s) {
       n=s.size();
         if(s[0]=='0')return 0;
-        memset(dp,-1,sizeof(dp));
         return find(s,0 );
         
     }
