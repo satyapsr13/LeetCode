@@ -2,7 +2,7 @@ class Solution {
 public:
     bool checkIfCanBreak(string s1, string s2) {
         
-        bool l=1;
+        bool l1=1,l2=1;
         sort(s1.begin(),s1.end());
         sort(s2.begin(),s2.end());
                 cout<<s1<<" "<<s2;
@@ -10,20 +10,11 @@ public:
         for(int i=0;i<s1.size();++i)
         {
            
-           l&= ( s1[i]>=s2[i]); 
-                // return 0;
+           l1&= ( s1[i]>=s2[i]); 
+           l2&= ( s1[i]<=s2[i]); 
+               
         }
-        if(l)
-          return l;
-        l=1;
-        
-        for(int i=0;i<s1.size();++i)
-        {
-           
-           l&= ( s1[i]<=s2[i]); 
-                // return 0;
-        }
-        
-        return l;
+         
+        return (l1 || l2);
     }
 };
