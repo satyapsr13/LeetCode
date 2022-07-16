@@ -17,19 +17,14 @@ public:
                 }
                 if(nums[i]>0)
                     l=1;
-            }
-            if(l==0)
-                return count;
-            for(int i=0;i<nums.size();++i)
-            { 
                 nums[i]=nums[i]/2;
               
             }
+            if(l==0)
+                return count;
               count++;
-            
             
         }
         return 0;
-        
     }
 };
