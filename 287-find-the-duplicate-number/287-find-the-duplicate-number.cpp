@@ -1,35 +1,31 @@
 class Solution {
-    
-    int check(vector<int>&v,int mid)
-    {
-        int count=0;
-        for(auto &it:v)
-          count+=(it<=mid);
-        return count>mid;
-    }
 public:
-    int findDuplicate(vector<int>& v) {
-     
+    int findDuplicate(vector<int>& nums) {
+        int n=nums.size();
+         
+        int l=nums[0];
+        int r= nums[0];
         
-        int l=*min_element(v.begin(),v.end());
-        int r=*max_element(v.begin(),v.end());
+        do{
+            l=nums[l];
+            r=nums[nums[r]];
             
-  int ans;
-        while(l<=r)
-        {
-            int mid=l+(r-l)/2;
             
-            if(check(v,mid))
-            {ans=mid;
-                // return mid;
-                r=mid-1;
-            }else{
-                
-                l=mid+1;
-                ans=l;
-            }
+            
+            
+        }while( l!=r );
+        l=nums[0];
+        while( l!=r )
+       {
+            l=nums[l];
+            r=nums[r];
+            
+            
+            
             
         }
-            return  ans;
+        
+        
+        return l;
     }
 };
