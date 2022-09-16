@@ -1,32 +1,29 @@
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
+        
+        int ind=-1;
+        
         int n=nums.size();
         
-        bool l=1;
-        int target=888;
         for(int i=n-1;i>0;--i)
-            
         {
             if(nums[i]>nums[i-1])
             {
-               target=i-1;
+                ind=i;
                 break;
             }
-        } 
-        
-        if(target==888)
+            
+        }
+        if(ind==-1)
         {
-            reverse(nums.begin(),nums.end());
+              reverse(nums.begin(),nums.end());
             return ;
         }
-        sort(nums.begin()+target+1,nums.end());
-       
-        auto it=upper_bound(nums.begin()+target+1,nums.end(),nums[target])-nums.begin();
+        reverse(nums.begin()+ind,nums.end());
+        int l=upper_bound(nums.begin()+ind,nums.end(),nums[ind-1])-nums.begin();
+        swap( nums[ind-1],nums[l]);
         
-        swap(nums[target],nums[it]);
         
-            // reverse(nums.begin(),nums.end());
-          
     }
 };
