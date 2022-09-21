@@ -1,59 +1,64 @@
 class Solution {
-    int n;
-    set<vector<int>>st;
-    vector<vector<int>>ans;
 public:
-    vector<vector<int>> threeSum(vector<int>& v) {
-        n=v.size();
-        if(n<3)return ans;
-        sort(v.begin(),v.end());
-        // for(auto &it:v)
-        //     cout<<it<<" ";
-        cout<<endl;
-        int i=0;int l=1,r=n-1;
-        cout<<"yes";
-        while(i<n-1)
-        {
-            // int target=-v[i-1];
-            l=i+1,r=n-1;
-         
-            while(l<r)
-            {  
-                // cout<<v[l]+v[r]+v[i]<<endl;
-                if(v[l]+v[r]+v[i]==0)
-                { cout<<"fd";
-                    st.insert({v[i],v[l],v[r]});
-                 while(l<r and v[l]==v[l+1] )l++;
-                 
-                 while(l<r and v[r]==v[r-1] )r--;
-                    l++;
-                    r--;
-                }
-                
-               else if(v[l]+v[r]+v[i]>0)
-                {
-                    // st.insert({v[i],v[l],v[r]});
-                    // l++;
-                    r--;
-                   continue;
-                }else 
-                if(v[l]+v[r]+v[i]<0)
-                {
-                    // st.insert({v[i],v[l],v[r]});
-                    l++;
-                    continue;
-                    // r--;
-                }
-                // cout<<i<<" "<<l<<" "<<r<<endl;
-            }
-            i++;
-        }
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>>ans;
+        int n=nums.size();
         
-        for(auto &it:st)
-            
+       sort(nums.begin(),nums.end()); 
+        int lastI=1000000;
+        for(int i=0;i<n-2;++i)
         {
-            ans.push_back(it);
+            // int sum=nums[i];
+                
+            int l=i+1,r=n-1;
+            bool ll=false;
+            
+            while(l<r )
+            {
+                int sum2=nums[l]+nums[r]+nums[i];
+                // cout<<l<<" "<<r<<" "<<i<<endl;
+                if(sum2>0)
+                {
+                    r--;
+                }else if(sum2<0)
+                {
+                    l++;
+                }else{
+                    
+                    vector<int>temp(3,0);
+                    temp[0]=nums[i];
+                    temp[1]=nums[l];
+                    temp[2]=nums[r];
+                    lastI=  temp[0];
+                    ll=true;
+                   
+                    while(nums[l]==temp[1] and l<r)l++;
+                    // l++;
+                    // r--;
+                    while(nums[r]==temp[2] and r>l)r--;
+                     
+                    ans.push_back(temp);
+                    
+                }
+            }
+            
+            
+            if(ll)
+              { 
+                  ll=false;
+                  while(nums[i]==lastI ){
+                      i++;   
+                         ll=true;
+                      if(i>=n)
+                          break;
+                   
+                  }
+                  if(ll)
+                    i--;
+                  
+               }
         }
+     
         return ans;
     }
 };
