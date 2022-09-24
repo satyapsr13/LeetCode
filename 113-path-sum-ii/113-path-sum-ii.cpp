@@ -10,25 +10,37 @@
  * };
  */
 class Solution {
-    vector<vector<int>>ans;
-    void find(TreeNode* root,int sum,vector<int>a)
+vector<vector<int>>ans;
+    
+    void dfs(TreeNode* root ,int targetSum,vector<int>v,int curSum)
     {
-        if(root==nullptr)return;
-        if(root->left==nullptr and root->right==nullptr and root->val==sum)
-        { a.push_back(root->val);
-            ans.push_back(a);
+        if(root==NULL)
+          return ;
+        if(root->left==NULL and root->right==NULL)
+        {   
+            if(targetSum==curSum+root->val)
+            { v.push_back(root->val);
+                 ans.push_back(v);
+             }
         }
-        a.push_back(root->val);
         
-         find(root->left,sum-root->val,a);
+        curSum+=root->val;
+        v.push_back(root->val);
+         
+        if(root->left)
+         dfs(root->left,targetSum,v,curSum);
         
-        find(root->right,sum-root->val,a);
         
+        if(root->right)
+         dfs(root->right,targetSum,v,curSum);
     }
-public:
+    
+    public:
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
-        vector<int>a;
-        find(root,targetSum,a);
+    vector<int>temp;
+         dfs(root,targetSum,temp,0);
+        
         return ans;
+        
     }
 };
